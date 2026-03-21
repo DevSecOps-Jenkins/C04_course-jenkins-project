@@ -59,10 +59,12 @@ pipeline {
 
         stage('Acceptance Test') {
             steps {
-                script {
-                    def service = "192.168.88.25:30007"
-                    echo "${service}"
-                    sh "k6 run -e SERVICE=${service} acceptance-test.js"
+                dir('05-kubernetes') {
+                    script {
+                        def service = "192.168.88.25:30007"
+                        echo "${service}"
+                        sh "k6 run -e SERVICE=${service} acceptance-test.js"
+                    }
                 }
             }
         }
