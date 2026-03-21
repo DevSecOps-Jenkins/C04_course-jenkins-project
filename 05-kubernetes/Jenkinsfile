@@ -22,6 +22,7 @@ pipeline {
             steps {
                 dir('05-kubernetes') {
                     sh "pytest"
+                }
             }
         }
 
