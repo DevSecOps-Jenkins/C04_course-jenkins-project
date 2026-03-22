@@ -16,9 +16,14 @@ pipeline {
                 echo "PR: ${CHANGE_ID}"
             }
         }            
-        stage('Setup') {
+        
+        stage('Install Dependencies') {
             steps {
-                sh "poetry install --with dev"
+                sh '''
+                export PATH="$HOME/.local/bin:$PATH"
+                poetry --version
+                poetry install --with dev
+                '''
             }
         }
 
