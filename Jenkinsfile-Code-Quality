@@ -1,5 +1,11 @@
 pipeline {
     agent any
+
+    environment {
+        PATH = "/var/lib/jenkins/.local/bin:${env.PATH}"
+    }
+
+
     stages {
         stage('environment variables') {
             steps {
@@ -16,11 +22,10 @@ pipeline {
                 echo "PR: ${CHANGE_ID}"
             }
         }            
-        
+
         stage('Install Dependencies') {
             steps {
                 sh '''
-                export PATH="$HOME/.local/bin:$PATH"
                 poetry --version
                 poetry install --with dev
                 '''
